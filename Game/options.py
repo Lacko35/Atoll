@@ -38,7 +38,7 @@ def openView():
         text="",
         width=40,
         height=40,
-        hover=None,
+        hover=False,
         fg_color="transparent",
         image=theme_icon,
         command=changeTheme
@@ -99,7 +99,7 @@ def openView():
 
 def startButtonClick():
     notNum = False
-    n = nTextEntry.get()
+    n = int(nTextEntry.get())
     hideButtons = switchVar.get() == 'on'
 
     try:
