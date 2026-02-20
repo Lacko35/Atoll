@@ -140,14 +140,18 @@ def processGroup(orderedGroups, board):
 
 def iterateThroughGroups(connectedGroups, board):
     lowest = -1
+
     orderedGroups, reverseOrderGroups = getOrderedGroups()
+
     for connectedGroup in connectedGroups:
         startIndex = orderedGroups.index(connectedGroup)
         reverseStartIndex = reverseOrderGroups.index(connectedGroup)
 
         firstOrderedGroups = orderedGroups[startIndex:] + orderedGroups[:startIndex]
         reverseOrderGroups = reverseOrderGroups[reverseStartIndex:] + reverseOrderGroups[:reverseStartIndex]
+
         curLowest = min(processGroup(firstOrderedGroups, board), processGroup(reverseOrderGroups, board))
+
         if lowest == -1:
             lowest = curLowest
             
@@ -368,10 +372,13 @@ def on_tile_click(r, c):
         matrix[lastMove[0]][lastMove[1]] = eTile.Playable.value[0]
 
     lastMove = (r, c)
+
     undoButton.configure(state = 'normal')
     confirmButton.configure(state = 'normal')
+
     matrix[r][c] = players[currentPlayer]
     buttons[r][c].configure(fg_color = playerColors[currentPlayer], state='disabled')
+    
     if hideButtons or getCurrentPlayerName() == 'Bot':
         confirmClick()
     else:
